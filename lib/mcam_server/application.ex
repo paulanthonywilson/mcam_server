@@ -4,6 +4,7 @@ defmodule McamServer.Application do
   @moduledoc false
 
   use Application
+  @unregistered_camera_registry_name :unregistered_camera_registry
 
   @impl true
   def start(_type, _args) do
@@ -15,9 +16,17 @@ defmodule McamServer.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: McamServer.PubSub},
       # Start the Endpoint (http/https)
-      McamServerWeb.Endpoint
+      McamServerWeb.Endpoint,
       # Start a worker by calling: McamServer.Worker.start_link(arg)
       # {McamServer.Worker, arg}
+
+      {Registry, keys: :unique, name: @unregistered_camera_registry_name},
+      {Registry,
+       keys: :duplicate,
+       name: McamServer.UnregisteredCameras.UnregisteredCameraEvents.registry_name()},
+      McamServer.UnregisteredCameras.UnregisteredCameraEntrySupervisor,
+      {McamServer.UnregisteredCameras,
+       name: McamServer.UnregisteredCameras, registry_name: @unregistered_camera_registry_name}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

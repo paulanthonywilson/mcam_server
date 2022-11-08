@@ -1,0 +1,25 @@
+nav.navigation ul li {
+	float: right;
+	list-style: none;
+	margin: 0;
+	padding: 0.5em 2em;
+}
+.main {
+	display: block;
+}
+body.fullscreen {
+	background-color: black;
+	color: #cfcfcf;
+}
+.camera-side h2 {
+	font-size: 3rem;
+}
+.accept-guest-invitation input {
+	width: 20rem;
+}
+img.fullscreen {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}

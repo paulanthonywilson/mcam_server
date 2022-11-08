@@ -32,3 +32,5 @@ mcam_server-*.tar
 npm-debug.log
 /assets/node_modules/
 
+/tmp
+*.secret.exs

@@ -80,4 +80,17 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+else
+  # Overrride camera and browser tokens for prod (obvs)
+  config :mcam_server, :camera_token,
+    secret: "zZlbrPr8Wpevh2L+90nz048s16VDlko4lEmcsVBH5XjsORaJjCSB49u2AZqlyOjk",
+    salt: "8XYbBElUVi5HQu3yuvB2w/KMruFnTRGizWfsL5li/edqWMnk8+fycKY+bKkM/Zy2"
+
+  config :mcam_server, :camera_token,
+    secret: "zZlbrPr8Wpevh2L+90nz048s16VDlko4lEmcsVBH5XjsORaJjCSB49u2AZqlyOjk",
+    salt: "8XYbBElUVi5HQu3yuvB2w/KMruFnTRGizWfsL5li/edqWMnk8+fycKY+bKkM/Zy2"
+
+  config :mcam_server, :browser_token,
+    secret: "Yo3h+LdkfXBCNqeGiAUYE+ZSsY9KxfUmCvtnC5Skaa4E8hEiGXsCW6udWO7ZmIgY",
+    salt: "9aTS+QnnFKSZ0j3MJZzjWW+cC3P7Y7wFprRw5tEYpFu2jDhOEJfRPy/szAo15HP7"
 end

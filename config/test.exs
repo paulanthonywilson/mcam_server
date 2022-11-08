@@ -1,5 +1,8 @@
 import Config
 
+# Only in tests, remove the complexity from the password hashing algorithm
+config :bcrypt_elixir, :log_rounds, 1
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -9,7 +12,7 @@ config :mcam_server, McamServer.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "mcam_server_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "standalone_mcam_server_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
@@ -20,8 +23,8 @@ config :mcam_server, McamServerWeb.Endpoint,
   secret_key_base: "4rDwi6JOaYT87QI35EPWAOrgO4DO7oFiSVKtQzAaChRPMD89/7tCKcGL0qPmSQQt",
   server: false
 
-# In test we don't send emails.
-config :mcam_server, McamServer.Mailer, adapter: Swoosh.Adapters.Test
+config :mcam_server, McamServer.Mailer, adapter: Swoosh.Adapters.Test, domain: "testy.test"
+config :swoosh, :api_client, false
 
 # Print only warnings and errors during test
 config :logger, level: :warn

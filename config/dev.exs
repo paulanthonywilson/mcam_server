@@ -5,7 +5,7 @@ config :mcam_server, McamServer.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "mcam_server_dev",
+  database: "standalone_mcam_server_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -19,7 +19,7 @@ config :mcam_server, McamServer.Repo,
 config :mcam_server, McamServerWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {127, 0, 0, 1}, port: 4600],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
@@ -73,3 +73,8 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Use actual mailer
+config :mcam_server, McamServer.Mailer, adapter: Swoosh.Adapters.Mailgun
+secret_mail = Path.join(__DIR__, "mailing.secret.exs")
+if File.exists?(secret_mail), do: import_config(secret_mail)

@@ -1,0 +1,10 @@
+<%= if @current_user do %>
+  <li class="column"><%= @current_user.email %></li>
+  <li class="column"><%= link "Cameras", to: Routes.camera_path(@conn, :index) %></li>
+  <li class="column"><%= link "Unregistered", to: Routes.unregistered_cameras_path(@conn, :index) %></li>
+  <li class="column"><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
+  <li class="column"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+<% else %>
+  <li class="column"><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+  <li class="column"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+<% end %>

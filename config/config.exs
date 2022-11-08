@@ -17,18 +17,13 @@ config :mcam_server, McamServerWeb.Endpoint,
   pubsub_server: McamServer.PubSub,
   live_view: [signing_salt: "Fs+L7r6Z"]
 
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :mcam_server, McamServer.Mailer, adapter: Swoosh.Adapters.Local
+{server_url, server_ws} =
+  case Mix.env() do
+    :dev -> {"http://localhost:4600", "ws://localhost:4600"}
+    _ -> {"https://mcam.iscodebaseonfire.com", "wss://mcam.iscodebaseonfire.com"}
+  end
 
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
-
+config :mcam_server, server_url: server_url, server_ws: server_ws
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",
