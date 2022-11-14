@@ -23,6 +23,7 @@ defmodule McamServerWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import McamServerWeb.ConnCase
+      import TestHelpers
 
       alias McamServerWeb.Router.Helpers, as: Routes
 

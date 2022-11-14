@@ -4,6 +4,7 @@ defmodule McamServer.UnregisteredCamerasTest do
   alias McamServer.UnregisteredCameras
 
   import McamServer.UnregisteredCamerasSupport
+  import TestHelpers
 
   setup do
     registry_name = self() |> inspect() |> String.to_atom()
@@ -177,20 +178,6 @@ defmodule McamServer.UnregisteredCamerasTest do
       expire_camera(unregistered_cameras, "nerves-b4lx")
 
       assert_receive {^unregistered_cameras, :removed, "nerves-b4lx"}
-    end
-  end
-
-  defp wait_until_equals(expected, actual_fn, attempt_count \\ 100)
-  defp wait_until_equals(_expected, actual_fn, 0), do: actual_fn.()
-
-  defp wait_until_equals(expected, actual_fn, attempt_count) do
-    case actual_fn.() do
-      ^expected ->
-        expected
-
-      _ ->
-        :timer.sleep(1)
-        wait_until_equals(expected, actual_fn, attempt_count - 1)
     end
   end
 end
