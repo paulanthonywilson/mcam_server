@@ -61,7 +61,7 @@ defmodule McamServerWeb.CameraLive do
 
   def render(%{live_action: :fullscreen} = assigns) do
     ~L"""
-    <%= live_component @socket, McamServerWeb.CameraComponent,  camera: @camera, live_action: @live_action %>
+    <%= live_component McamServerWeb.CameraComponent,  camera: @camera, live_action: @live_action %>
     </div>
     """
   end
@@ -73,12 +73,12 @@ defmodule McamServerWeb.CameraLive do
     <% end %>
     <div class="row">
       <div class="column column-70">
-            <%= live_component @socket, McamServerWeb.CameraComponent,  camera: @camera, live_action: @live_action %>
+            <%= live_component  McamServerWeb.CameraComponent,  camera: @camera, live_action: @live_action %>
       </div>
       <div class="column-30 camera-side">
         <div class="row">
           <div class="column">
-            <%= live_component @socket, McamServerWeb.AllCamerasComponent, all_cameras: @all_cameras,
+            <%= live_component McamServerWeb.AllCamerasComponent, all_cameras: @all_cameras,
                                                                            camera: @camera,
                                                                            all_camera_count: @all_camera_count,
                                                                            subscription_plan: @subscription_plan,
@@ -87,12 +87,12 @@ defmodule McamServerWeb.CameraLive do
         </div>
         <div class="row">
           <div class="column">
-            <%= live_component @socket, McamServerWeb.GuestCamerasComponenent, guest_cameras: @guest_cameras, camera: @camera %>
+            <%= live_component McamServerWeb.GuestCamerasComponenent, guest_cameras: @guest_cameras, camera: @camera %>
           </div>
         </div>
         <div class="row">
           <div class="column">
-            <%= live_component @socket, McamServerWeb.InviteAGuestComponent, camera: @camera, user: @user, id: :invite_guest %>
+            <%= live_component McamServerWeb.InviteAGuestComponent, camera: @camera, user: @user, id: :invite_guest %>
           </div>
         </div>
       </div>

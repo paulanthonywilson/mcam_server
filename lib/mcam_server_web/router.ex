@@ -107,8 +107,8 @@ defmodule McamServerWeb.Router do
   scope "/fullscreen", McamServerWeb do
     pipe_through([:browser, :require_confirmed_user, :fullscreen])
 
-    live("camera/:camera_id", CameraLive, :fullscreen)
-    live("guest_camera/:camera_id", GuestCameraLive, :fullscreen)
+    live("/camera/:camera_id", CameraLive, :fullscreen)
+    live("/guest_camera/:camera_id", GuestCameraLive, :fullscreen)
   end
 
   # For unconfirmed but authenticated
