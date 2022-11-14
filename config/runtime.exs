@@ -63,29 +63,20 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  # ## Configuring the mailer
-  #
-  # In production you need to configure the mailer to use a different adapter.
-  # Also, you may need to configure the Swoosh API client of your choice if you
-  # are not using SMTP. Here is an example of the configuration:
-  #
-  #     config :mcam_server, McamServer.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
-  #
-  # For this example you need include a HTTP client required by Swoosh API client.
-  # Swoosh supports Hackney and Finch out of the box:
-  #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
-  #
-  # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  config :mcam_server, McamServer.Mailer,
+    adapter: Swoosh.Adapters.Sendgrid,
+    api_key: System.fetch_env!("SENDGRID_API_KEY"),
+    domain: "iscodebaseonfire.com"
+
+  config :mcam_server, :camera_token,
+    secret: System.fetch_env!("CAMERA_SECRET"),
+    salt: System.fetch_env!("CAMERA_SALT")
+
+  config :mcam_server, :browser_token,
+    secret: System.fetch_env!("BROWSER_SECRET"),
+    salt: System.fetch_env!("BROWSER_SALT")
 else
   # Overrride camera and browser tokens for prod (obvs)
-  config :mcam_server, :camera_token,
-    secret: "zZlbrPr8Wpevh2L+90nz048s16VDlko4lEmcsVBH5XjsORaJjCSB49u2AZqlyOjk",
-    salt: "8XYbBElUVi5HQu3yuvB2w/KMruFnTRGizWfsL5li/edqWMnk8+fycKY+bKkM/Zy2"
-
   config :mcam_server, :camera_token,
     secret: "zZlbrPr8Wpevh2L+90nz048s16VDlko4lEmcsVBH5XjsORaJjCSB49u2AZqlyOjk",
     salt: "8XYbBElUVi5HQu3yuvB2w/KMruFnTRGizWfsL5li/edqWMnk8+fycKY+bKkM/Zy2"
