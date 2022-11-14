@@ -4,7 +4,7 @@ defmodule McamServerWeb.CameraLiveHelperTest do
   import McamServer.AccountsFixtures
   import McamServer.CamerasFixtures
 
-  alias McamServer.{Accounts, Cameras}
+  alias McamServer.{Accounts, Cameras, Cameras.Camera}
   alias McamServerWeb.CameraLiveHelper
 
   alias Phoenix.LiveView.Socket
@@ -172,8 +172,14 @@ defmodule McamServerWeb.CameraLiveHelperTest do
     end
 
     test "assigns the user's cameras", %{session: session, user_cameras: user_cameras} do
-      assert {:ok, %{assigns: %{all_cameras: ^user_cameras}}} =
+      assert {:ok, %{assigns: %{all_cameras: assigned_cameras}}} =
                CameraLiveHelper.mount_camera(%{}, session, %Socket{})
+
+      extract_camera_ids = fn cams ->
+        cams |> Enum.map(fn %Camera{id: id} -> id end) |> Enum.sort()
+      end
+
+      assert extract_camera_ids.(user_cameras) == extract_camera_ids.(assigned_cameras)
     end
 
     test "counts the user's cameras", %{session: session, user_cameras: user_cameras} do

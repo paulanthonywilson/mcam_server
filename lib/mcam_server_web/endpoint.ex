@@ -11,6 +11,8 @@ defmodule McamServerWeb.Endpoint do
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/raw_ws/camera_interface/:token", McamServerWeb.ImageStreaming.CameraCommsSocket
+  socket "/raw_ws/browser_interface/:token", McamServerWeb.ImageStreaming.BrowserCommsSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #

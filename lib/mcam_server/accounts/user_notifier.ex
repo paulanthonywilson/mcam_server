@@ -1,19 +1,10 @@
 defmodule McamServer.Accounts.UserNotifier do
-  import Swoosh.Email
-
   alias McamServer.Mailer
 
   # Delivers the email using the application mailer.
   defp deliver(recipient, subject, body) do
-    email =
-      new()
-      |> to(recipient)
-      |> from({"McamServer", "contact@example.com"})
-      |> subject(subject)
-      |> text_body(body)
-
-    with {:ok, _metadata} <- Mailer.deliver(email) do
-      {:ok, email}
+    with {:ok, metadata} <- Mailer.send_email(recipient, subject, body) do
+      {:ok, metadata}
     end
   end
 

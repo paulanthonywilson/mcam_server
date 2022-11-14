@@ -156,6 +156,6 @@ defmodule McamServer.GuestInvitations do
     The Mere Cams
     """
 
-    Mailer.deliver(invitation_email, subject, body)
+    Mailer.send_email(invitation_email, subject, body)
   end
 end

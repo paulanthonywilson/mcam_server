@@ -3,7 +3,7 @@ defmodule McamServer.Mailer do
 
   alias Swoosh.Email
 
-  def deliver(to, subject, body) do
+  def send_email(to, subject, body) do
     require Logger
 
     email =
