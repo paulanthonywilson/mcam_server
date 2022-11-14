@@ -45,7 +45,9 @@ defmodule McamServer.MixProject do
       {:plug_cowboy, "~> 2.5"},
 
       # app specific
-      {:hackney, "~> 1.9"}
+      {:hackney, "~> 1.9"},
+      {:recon, "~> 2.5"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 

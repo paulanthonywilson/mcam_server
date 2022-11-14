@@ -1,4 +1,5 @@
 defmodule McamServer.Mailer do
+  @moduledoc false
   use Swoosh.Mailer, otp_app: :mcam_server
 
   alias Swoosh.Email

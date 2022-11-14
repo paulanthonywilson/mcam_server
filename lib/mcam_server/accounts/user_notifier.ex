@@ -1,11 +1,13 @@
 defmodule McamServer.Accounts.UserNotifier do
+  @moduledoc """
+  Sends account related emails to the account-holder.
+  """
+
   alias McamServer.Mailer
 
   # Delivers the email using the application mailer.
   defp deliver(recipient, subject, body) do
-    with {:ok, metadata} <- Mailer.send_email(recipient, subject, body) do
-      {:ok, metadata}
-    end
+    Mailer.send_email(recipient, subject, body)
   end
 
   @doc """

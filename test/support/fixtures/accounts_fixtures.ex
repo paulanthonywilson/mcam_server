@@ -13,9 +13,8 @@ defmodule McamServer.AccountsFixtures do
   def user_fixture(attrs \\ %{}) do
     with attrs <-
            Enum.into(valid_user_attributes(attrs), %{confirm?: true}),
-         {:ok, user} <- Accounts.register_user(attrs),
-         user <- maybe_confirm(user, attrs) do
-      user
+         {:ok, user} <- Accounts.register_user(attrs) do
+      maybe_confirm(user, attrs)
     end
   end
 
