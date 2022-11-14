@@ -17,8 +17,10 @@ defmodule McamServerWeb.LiveHelpers do
         return_to: Routes.penguin_index_path(@socket, :index) %>
   """
   def live_modal(component, opts) do
-    path = Keyword.fetch!(opts, :return_to)
-    modal_opts = [id: :modal, return_to: path, component: component, opts: opts]
-    live_component(nil, McamServerWeb.ModalComponent, modal_opts)
+    # path = Keyword.fetch!(opts, :return_to)
+    # live_component(%{id: :modal, module: component, return_to: path, opts: opts})
+    opts
+    |> Enum.into(%{id: :modal, module: component})
+    |> live_component()
   end
 end

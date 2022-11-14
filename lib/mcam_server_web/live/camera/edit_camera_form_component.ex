@@ -5,10 +5,10 @@ defmodule McamServerWeb.EditItemFormComponent do
   use McamServerWeb, :live_component
 
   def render(assigns) do
-    ~L"""
+    ~H"""
     <form phx-submit="update-camera-name">
       <label for="camera-name">Name</label>
-      <input name="camera-name" value="<%=@camera.name %>"></input>
+      <input name="camera-name" value={@camera.name}/>
       <button type="submit">Change</button>
     </form>
     """
