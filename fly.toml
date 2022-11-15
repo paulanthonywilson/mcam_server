@@ -9,7 +9,7 @@ processes = []
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "mcam-server.fly.dev"
+  PHX_HOST = "mcam.iscodebaseonfire.com"
   PORT = "8080"
 
 [experimental]

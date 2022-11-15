@@ -17,6 +17,8 @@ config :mcam_server, McamServerWeb.Endpoint,
   pubsub_server: McamServer.PubSub,
   live_view: [signing_salt: "Fs+L7r6Z"]
 
+config :mcam_server, :csp_host, "localhost"
+
 {server_url, server_ws} =
   case Mix.env() do
     :dev -> {"http://localhost:4600", "ws://localhost:4600"}

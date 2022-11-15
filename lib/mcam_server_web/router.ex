@@ -3,11 +3,7 @@ defmodule McamServerWeb.Router do
 
   import McamServerWeb.UserAuth
 
-  host =
-    :mcam_server
-    |> Application.compile_env(McamServerWeb.Endpoint)
-    |> Keyword.fetch!(:url)
-    |> Keyword.fetch!(:host)
+  host = Application.compile_env!(:mcam_server, :csp_host)
 
   @content_security_policy (case(Mix.env()) do
                               :prod ->
